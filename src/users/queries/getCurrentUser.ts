@@ -1,6 +1,8 @@
-import { Ctx } from "blitz"
-import db from "db"
+import { Ctx } from 'blitz'
 
+import db from 'db'
+
+// eslint-disable-next-line default-param-last
 export default async function getCurrentUser(_ = null, { session }: Ctx) {
   if (!session.userId) return null
 
