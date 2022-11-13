@@ -4,14 +4,14 @@ import { useMutation } from '@blitzjs/rpc'
 import forgotPassword from 'src/auth/mutations/forgotPassword'
 import { ForgotPassword } from 'src/auth/validations'
 import { FORM_ERROR, Form } from 'src/core/components/Form'
-import { LabeledTextField } from 'src/core/components/LabeledTextField'
-import Layout from 'src/core/layouts/Layout'
+import { LabeledTextField } from 'src/core/components/ui/LabeledTextField/LabeledTextField'
+import { AppContainer } from 'src/core/components/layout/AppContainer'
 
 const ForgotPasswordPage: BlitzPage = () => {
   const [forgotPasswordMutation, { isSuccess }] = useMutation(forgotPassword)
 
   return (
-    <Layout title="Forgot Your Password?">
+    <AppContainer title="パスワードを忘れてしまった場合">
       <h1>Forgot your password?</h1>
 
       {isSuccess ? (
@@ -37,7 +37,7 @@ const ForgotPasswordPage: BlitzPage = () => {
           <LabeledTextField name="email" label="Email" placeholder="Email" />
         </Form>
       )}
-    </Layout>
+    </AppContainer>
   )
 }
 

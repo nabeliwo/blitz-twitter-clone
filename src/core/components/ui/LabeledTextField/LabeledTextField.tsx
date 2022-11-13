@@ -1,20 +1,19 @@
+import { styled } from '@linaria/react'
 import { ComponentPropsWithoutRef, PropsWithoutRef, forwardRef } from 'react'
 import { UseFieldConfig, useField } from 'react-final-form'
 
-export interface LabeledTextFieldProps extends PropsWithoutRef<JSX.IntrinsicElements['input']> {
-  /** Field name. */
+export type LabeledTextFieldProps = PropsWithoutRef<JSX.IntrinsicElements['input']> & {
   name: string
-  /** Field label. */
   label: string
-  /** Field type. Doesn't include radio buttons and checkboxes */
   type?: 'text' | 'password' | 'email' | 'number'
+  width?: number
   outerProps?: PropsWithoutRef<JSX.IntrinsicElements['div']>
   labelProps?: ComponentPropsWithoutRef<'label'>
   fieldProps?: UseFieldConfig<string>
 }
 
 export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldProps>(
-  ({ name, label, outerProps, fieldProps, labelProps, ...props }, ref) => {
+  ({ name, label, width, outerProps, fieldProps, labelProps, ...props }, ref) => {
     const {
       input,
       meta: { touched, error, submitError, submitting },
@@ -31,19 +30,28 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
 
     return (
       <div {...outerProps}>
-        <label {...labelProps}>
+        <Label {...labelProps} style={{ width: width ? `${width}px` : 'auto' }}>
           {label}
-          <input {...input} {...props} disabled={submitting} ref={ref} />
-        </label>
+          <Input {...input} {...props} disabled={submitting} ref={ref} />
+        </Label>
 
-        {touched && normalizedError && (
-          <div role="alert" style={{ color: 'red' }}>
-            {normalizedError}
-          </div>
-        )}
+        {touched && normalizedError && <Alert role="alert">{normalizedError}</Alert>}
       </div>
     )
   },
 )
 
-export default LabeledTextField
+const Label = styled.label`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`
+const Input = styled.input`
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid grey;
+`
+const Alert = styled.div`
+  margin-top: 8px;
+  color: red;
+`

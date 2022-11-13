@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react'
 import resetPassword from 'src/auth/mutations/resetPassword'
 import { ResetPassword } from 'src/auth/validations'
 import { FORM_ERROR, Form } from 'src/core/components/Form'
-import { LabeledTextField } from 'src/core/components/LabeledTextField'
-import Layout from 'src/core/layouts/Layout'
+import { LabeledTextField } from 'src/core/components/ui/LabeledTextField/LabeledTextField'
+import { AppContainer } from 'src/core/components/layout/AppContainer'
 
 const ResetPasswordPage: BlitzPage = () => {
   const [token, setToken] = useState('')
@@ -64,6 +64,6 @@ const ResetPasswordPage: BlitzPage = () => {
 }
 
 ResetPasswordPage.redirectAuthenticatedTo = '/'
-ResetPasswordPage.getLayout = (page) => <Layout title="Reset Your Password">{page}</Layout>
+ResetPasswordPage.getLayout = (page) => <AppContainer title="パスワードリセット">{page}</AppContainer>
 
 export default ResetPasswordPage

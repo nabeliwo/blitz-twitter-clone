@@ -20,9 +20,9 @@ module.exports = {
     ],
     'import/no-duplicates': ['error'],
     'import/no-useless-path-segments': ['error'],
-    'smarthr/a11y-clickable-element-has-text': 'warn',
+    'smarthr/a11y-clickable-element-has-text': 'off',
     'smarthr/a11y-image-has-alt-attribute': 'warn',
-    'smarthr/a11y-trigger-has-button': 'error',
+    'smarthr/a11y-trigger-has-button': 'off',
     'smarthr/best-practice-for-date': 'error',
     'smarthr/prohibit-export-array-type': 'error',
     'smarthr/jsx-start-with-spread-attributes': [

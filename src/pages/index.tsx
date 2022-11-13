@@ -4,8 +4,7 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 
 import logout from 'src/auth/mutations/logout'
-import { path } from 'src/constants/application'
-import Layout from 'src/core/layouts/Layout'
+import { AppLayout } from 'src/core/components/layout/AppLayout'
 import { useCurrentUser } from 'src/users/hooks/useCurrentUser'
 
 const UserInfo = () => {
@@ -50,14 +49,14 @@ const UserInfo = () => {
 
 const Home: BlitzPage = () => {
   return (
-    <Layout title="blitz-twitter-clone">
+    <AppLayout>
       <Suspense fallback="Loading...">
         <UserInfo />
       </Suspense>
-    </Layout>
+    </AppLayout>
   )
 }
 
-Home.authenticate = { redirectTo: path.auth.login() }
+Home.authenticate = { redirectTo: Routes.LoginPage() }
 
 export default Home

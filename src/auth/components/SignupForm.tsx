@@ -3,7 +3,7 @@ import { useMutation } from '@blitzjs/rpc'
 import signup from 'src/auth/mutations/signup'
 import { Signup } from 'src/auth/validations'
 import { FORM_ERROR, Form } from 'src/core/components/Form'
-import { LabeledTextField } from 'src/core/components/LabeledTextField'
+import { LabeledTextField } from 'src/core/components/ui/LabeledTextField/LabeledTextField'
 
 type SignupFormProps = {
   onSuccess?: () => void

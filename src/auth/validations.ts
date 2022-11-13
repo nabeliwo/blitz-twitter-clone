@@ -1,11 +1,11 @@
 import { z } from 'zod'
 
-export const email = z
+const email = z
   .string()
   .email()
   .transform((str) => str.toLowerCase().trim())
 
-export const password = z
+const password = z
   .string()
   .min(10)
   .max(100)
@@ -27,7 +27,7 @@ export const ForgotPassword = z.object({
 
 export const ResetPassword = z
   .object({
-    password: password,
+    password,
     passwordConfirmation: password,
     token: z.string(),
   })

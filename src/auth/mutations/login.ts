@@ -7,9 +7,10 @@ import { Login } from '../validations'
 import db from 'db'
 import { Role } from 'types'
 
-export const authenticateUser = async (rawEmail: string, rawPassword: string) => {
+const authenticateUser = async (rawEmail: string, rawPassword: string) => {
   const { email, password } = Login.parse({ email: rawEmail, password: rawPassword })
   const user = await db.user.findFirst({ where: { email } })
+
   if (!user) throw new AuthenticationError()
 
   const result = await SecurePassword.verify(user.hashedPassword, password)
@@ -21,6 +22,7 @@ export const authenticateUser = async (rawEmail: string, rawPassword: string) =>
   }
 
   const { hashedPassword, ...rest } = user
+
   return rest
 }
 
