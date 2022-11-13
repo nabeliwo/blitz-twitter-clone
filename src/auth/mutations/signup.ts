@@ -14,5 +14,6 @@ export default resolver.pipe(resolver.zod(Signup), async ({ email, password }, c
   })
 
   await ctx.session.$create({ userId: user.id, role: user.role as Role })
+
   return user
 })

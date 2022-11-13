@@ -2,6 +2,7 @@ import { Routes } from '@blitzjs/next'
 import { useMutation } from '@blitzjs/rpc'
 import { styled } from '@linaria/react'
 import { AuthenticationError, PromiseReturnType } from 'blitz'
+import { FC } from 'react'
 
 import login from 'src/auth/mutations/login'
 import { Login } from 'src/auth/validations'
@@ -9,11 +10,11 @@ import { FORM_ERROR, Form } from 'src/core/components/ui/Form'
 import { LabeledTextField } from 'src/core/components/ui/LabeledTextField/LabeledTextField'
 import { TextLink } from 'src/core/components/ui/TextLink'
 
-type LoginFormProps = {
-  onSuccess?: (user: PromiseReturnType<typeof login>) => void
+type Props = {
+  onSuccess: (user: PromiseReturnType<typeof login>) => void
 }
 
-export const LoginForm = (props: LoginFormProps) => {
+export const LoginForm: FC<Props> = ({ onSuccess }) => {
   const [loginMutation] = useMutation(login)
 
   return (
@@ -25,10 +26,10 @@ export const LoginForm = (props: LoginFormProps) => {
         onSubmit={async (values) => {
           try {
             const user = await loginMutation(values)
-            props.onSuccess?.(user)
+            onSuccess(user)
           } catch (error: any) {
             if (error instanceof AuthenticationError) {
-              return { [FORM_ERROR]: 'Email もしくはパスワードが間違っています。' }
+              return { [FORM_ERROR]: 'メールアドレスもしくはパスワードが間違っています。' }
             } else {
               return {
                 [FORM_ERROR]: 'Sorry, we had an unexpected error. Please try again. - ' + error.toString(),
@@ -37,7 +38,7 @@ export const LoginForm = (props: LoginFormProps) => {
           }
         }}
       >
-        <LabeledTextField name="email" label="Email" width={300} />
+        <LabeledTextField name="email" label="メールアドレス" width={300} />
 
         <Password>
           <LabeledTextField name="password" label="パスワード" type="password" width={520} />
